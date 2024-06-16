@@ -16,6 +16,6 @@ app.use(express.json())
 import urlRoute from "./routers/url.routes.js"
 
 
-app.use("/url",urlRoute)
+app.use("/",urlRoute)
 
 export {app}

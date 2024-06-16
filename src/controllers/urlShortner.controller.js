@@ -12,7 +12,7 @@ const generateShortURL = async (req, res) => {
 
   const shortURL = nanoid(8);
   await URL.create({
-    shortUrl: shortURL,
+    url: shortURL,
     redirectURL: url,
     clicks: [],
   });
@@ -22,10 +22,9 @@ const generateShortURL = async (req, res) => {
 
 const redirectUrl = async (req, res) => {
   const shortUrl = req.params.id;
-  console.log(req.params.id);
   const entry = await URL.findOneAndUpdate(
     {
-      shortUrl: shortUrl,
+      url: shortUrl,
     },
     {
       $push: {
@@ -33,8 +32,23 @@ const redirectUrl = async (req, res) => {
       },
     }
   );
-  console.log(entry);
   res.redirect(entry.redirectURL);
 };
 
-export { generateShortURL, redirectUrl };
+const getUrlClicks = async (req, res) => {
+  const id = req.params.id;
+  const info = await URL.findOne({
+    url: id,
+  });
+  if (!info) {
+    return res.status(400).json({
+      error: "Url has not Found",
+    });
+  }
+  console.log(info);
+  res.json({
+    urlData: info,
+  });
+};
+
+export { generateShortURL, redirectUrl, getUrlClicks };

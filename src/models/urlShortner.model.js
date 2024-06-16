@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const urlSchema = new Schema(
   {
-    shortUrl: {
+    url: {
       type: String,
       required: true,
       unique: true,
