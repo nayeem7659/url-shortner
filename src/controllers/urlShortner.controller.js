@@ -45,7 +45,6 @@ const getUrlClicks = async (req, res) => {
       error: "Url has not Found",
     });
   }
-  console.log(info);
   res.json({
     urlData: info,
   });
