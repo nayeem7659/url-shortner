@@ -1,6 +1,9 @@
 import express from "express";
-import cors from "cors";
+dotenv.config();
 
+
+import cors from "cors";
+import dotenv from "dotenv";
 const app = express();
 
 app.use(
@@ -10,12 +13,11 @@ app.use(
   })
 );
 
-app.use(express.json())
+app.use(express.json());
 // app.use(express.urlencoded())
 
-import urlRoute from "./routers/url.routes.js"
+import urlRoute from "./routers/url.routes.js";
 
+app.use("/", urlRoute);
 
-app.use("/",urlRoute)
-
-export {app}
+export { app };
